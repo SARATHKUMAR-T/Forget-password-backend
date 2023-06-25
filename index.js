@@ -94,7 +94,7 @@ app.post("/forgot-password", async (req, res) => {
     const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, {
       expiresIn: "15m",
     });
-    const link = `http://localhost:3000/reset-password/${oldUser._id}/${token}`;
+    const link = `https://forgot-password-1.netlify.app/reset-password/${oldUser._id}/${token}`;
 
     var transporter = nodemailer.createTransport({
       service: "gmail",
@@ -159,7 +159,6 @@ app.post("/reset-password/:id/:token", async (req, res) => {
       newpassword: true,
     });
   } catch (error) {
-    console.log(error);
     res.json({ status: "Something Went Wrong", error });
   }
 });
